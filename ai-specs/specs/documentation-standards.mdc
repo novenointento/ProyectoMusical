@@ -1,12 +1,23 @@
 ---
-description: Documentation rules for this starter repository.
+description: Reglas de documentacion tecnica para Proyecto Musical.
 alwaysApply: true
 ---
 
-# Documentation Standards
+# Estandares de documentacion
 
-- Keep product-facing technical documentation in English.
-- Update README when the template starts representing a real product.
-- Remove placeholder text once a real decision exists.
-- Keep OpenSpec artifacts and implementation in sync.
-- Document assumptions, constraints, and next steps explicitly.
+- Toda la documentacion tecnica y visible al usuario en **espanol** (el
+  codigo en ingles, ver `base-standards.mdc`).
+- `README.md` describe el producto real (Proyecto Musical), no la plantilla
+  previa.
+- `ai-specs/specs/data-model.md` y `prisma/schema.prisma` deben mantenerse
+  coherentes. Si cambian las entidades, actualiza ambos en el mismo PR.
+- `ai-specs/specs/api-spec.yml` documenta solo endpoints REST accesibles
+  desde cliente. Las server actions no se documentan aqui; se describen en
+  los specs del change OpenSpec que las introduce.
+- Los cambios de fondo entran primero como artefactos OpenSpec
+  (`proposal.md`, `design.md`, `tasks.md`, `specs/**/spec.md`) y luego se
+  implementan.
+- Comentarios de codigo: solo cuando el "por que" no es evidente. No
+  expliques lo que el identificador ya deja claro.
+- Evita placeholders: si decides algo, documenta la decision; si no,
+  abre una pregunta en el change OpenSpec en vez de dejar texto ambiguo.

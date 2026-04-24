@@ -1,16 +1,20 @@
 schema: spec-driven
 
 context: |
-  Tech stack: React frontend, Node.js/Express backend, Prisma, PostgreSQL.
-  Goal: use this repository as a reusable starter template for new products.
-  Keep business logic generic until a real project domain is defined.
-  All new changes should be captured first in OpenSpec artifacts before implementation.
+  Proyecto Musical - aplicacion de estudio de lenguaje musical para
+  estudiantes de conservatorio elemental.
+  Stack: Next.js 15 (App Router) + TypeScript + Prisma + PostgreSQL (Neon).
+  Auth.js v5 con Credentials provider.
+  Motor musical: Tonal.js (logica pura), Tone.js (audio), VexFlow (pentagrama).
+  Contenido en MDX bajo /content, metadata en BD.
+  Todos los cambios se capturan primero como artefactos OpenSpec.
 
 rules:
   _global:
-    - Read README.md and ai-specs/specs/base-standards.mdc before creating artifacts.
-    - Keep each change small, concrete, and testable.
-    - Replace examples with project-specific content as soon as the real domain is known.
+    - Leer README.md y ai-specs/specs/base-standards.mdc antes de crear artefactos.
+    - Cada change debe ser pequeno, concreto y verificable.
+    - Validar entradas en server actions/API con Zod.
+    - Preservar el contrato ExerciseDefinition al anadir tipos nuevos.
   tasks:
-    - Break work into tasks of less than 2 hours.
-    - Every change should end with verification and documentation updates.
+    - Tareas de menos de 2h.
+    - Todo change termina con verificacion y actualizacion de documentacion.

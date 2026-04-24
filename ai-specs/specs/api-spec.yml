@@ -1,18 +1,68 @@
 openapi: 3.0.3
 info:
-  title: Project Template API
+  title: Proyecto Musical API
   version: 0.1.0
-  description: Minimal API contract for the starter template.
+  description: |
+    Contrato de los endpoints HTTP expuestos por la aplicacion Next.js 15.
+    La mayoria de mutaciones del MVP se hacen via server actions y no aparecen
+    aqui; este documento cubre endpoints REST accesibles desde cliente.
+
 paths:
-  /health:
+  /api/health:
     get:
       summary: Health check
+      description: Estado del servicio.
       responses:
         '200':
-          description: Service is available
-  /api/example-task:
+          description: Servicio disponible
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string, example: ok }
+                  service: { type: string, example: proyecto-musical }
+                  timestamp: { type: string, format: date-time }
+
+  /api/auth/register:
+    post:
+      summary: Registro de usuario
+      description: Crea un usuario con email + password. Devuelve el usuario creado.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                name: { type: string, maxLength: 80 }
+                email: { type: string, format: email, maxLength: 180 }
+                password: { type: string, minLength: 8, maxLength: 128 }
+      responses:
+        '201':
+          description: Usuario creado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    type: object
+                    properties:
+                      id: { type: string }
+                      email: { type: string }
+                      name: { type: string, nullable: true }
+        '400': { description: Datos invalidos }
+        '409': { description: Email ya registrado }
+
+  /api/auth/[...nextauth]:
     get:
-      summary: Example task payload
+      summary: Endpoints de Auth.js v5
+      description: Reexpone handlers de next-auth (signin, callback, session, csrf).
       responses:
-        '200':
-          description: Generic task example returned
+        '200': { description: Gestionado por Auth.js }
+    post:
+      summary: Endpoints de Auth.js v5 (mutaciones)
+      responses:
+        '200': { description: Gestionado por Auth.js }

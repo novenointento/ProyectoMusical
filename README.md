@@ -1,161 +1,142 @@
-# LTI (Leadership. Technology. Impact) - Sistema ATS
+# Proyecto Musical
 
-## 📋 Descripción general
+Aplicacion web para estudiar **lenguaje musical** en el nivel de
+**conservatorio elemental**. Combina teoria breve con ejercicios
+interactivos (opcion multiple sobre pentagrama, dictado, escritura de
+notas y escucha-repite) y mantiene progreso y logros por usuario.
 
-LTI ATS (Applicant Tracking System) es una plataforma moderna full-stack para la gestión de procesos de selección. El sistema permite a las organizaciones gestionar candidaturas, seguir aplicaciones, organizar entrevistas y tomar decisiones de contratación basadas en datos.
+## Stack
 
-### 🎯 Propósito
+- **Next.js 15** (App Router) + **TypeScript** estricto
+- **Tailwind CSS** + **shadcn/ui** + **lucide-react**
+- **Zustand** (estado cliente) + **TanStack Query** (estado servidor)
+- **Zod** (validacion y tipos compartidos)
+- **Auth.js v5** (Credentials, JWT) + **PrismaAdapter**
+- **Prisma** + **PostgreSQL** (Neon en produccion)
+- **Tone.js** (audio), **Tonal.js** (teoria), **VexFlow** (pentagrama)
+- **MDX** (`@next/mdx`) para el contenido teorico
+- **Vitest** (unit) + **Playwright** (E2E)
+- Hosting **Vercel**
 
-LTI ATS aborda retos clave del reclutamiento moderno mediante:
-
-- **Gestión centralizada de candidatos**: perfiles completos con educación, experiencia y documentos.
-- **Procesos de entrevista estructurados**: flujos configurables con múltiples etapas y criterios.
-- **Seguimiento de aplicaciones**: visibilidad end-to-end del avance en el pipeline.
-- **Decisión colaborativa**: coordinación y evaluación entre múltiples stakeholders.
-- **Insights basados en datos**: analítica y reporting para optimizar el proceso de selección.
-
-### 🏗️ Arquitectura
-
-El sistema sigue principios de **Domain-Driven Design (DDD)** con una arquitectura limpia por capas:
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    Capa de Presentación                     │
-│  ┌─────────────────────┐    ┌─────────────────────────────┐│
-│  │   Frontend React    │    │  Controladores Express.js   ││
-│  │   (TypeScript)      │    │      (API REST)             ││
-│  └─────────────────────┘    └─────────────────────────────┘│
-└─────────────────────────────────────────────────────────────┘
-┌─────────────────────────────────────────────────────────────┐
-│                    Capa de Aplicación                       │
-│  ┌─────────────────────────────────────────────────────────┐│
-│  │              Servicios y Casos de Uso                   ││
-│  │     (candidateService, positionService, etc.)           ││
-│  └─────────────────────────────────────────────────────────┘│
-└─────────────────────────────────────────────────────────────┘
-┌─────────────────────────────────────────────────────────────┐
-│                      Capa de Dominio                        │
-│  ┌─────────────────────────────────────────────────────────┐│
-│  │       Modelos de Dominio y Lógica de Negocio            ││
-│  │   (Candidate, Position, Application, Interview)         ││
-│  └─────────────────────────────────────────────────────────┘│
-└─────────────────────────────────────────────────────────────┘
-┌─────────────────────────────────────────────────────────────┐
-│                   Capa de Infraestructura                   │
-│  ┌─────────────────────┐    ┌─────────────────────────────┐│
-│  │     PostgreSQL      │    │         Prisma ORM          ││
-│  │    (Base de datos)  │    │      (Acceso a datos)       ││
-│  └─────────────────────┘    └─────────────────────────────┘│
-└─────────────────────────────────────────────────────────────┘
-```
-
-## 🛠️ Tecnologías
-
-### Backend
-- **Node.js** con **TypeScript** - runtime de servidor y seguridad de tipos.
-- **Express.js** - framework web para API REST.
-- **Prisma ORM** - cliente de base de datos tipado y migraciones.
-- **PostgreSQL** - base de datos principal.
-- **Jest** - pruebas unitarias e integración.
-- **Serverless Framework** - capacidades de despliegue cloud.
-
-### Frontend
-- **React 18** con **TypeScript** - framework UI moderno con tipado.
-- **React Bootstrap** - librería de componentes UI.
-- **React Router DOM** - enrutado del lado cliente.
-- **React Beautiful DnD** - drag and drop para tableros Kanban.
-- **React DatePicker** - componentes de selección de fecha.
-
-### DevOps y testing
-- **Docker** - contenedorización para PostgreSQL.
-- **Cypress** - framework de pruebas end-to-end.
-- **ESLint** y **Prettier** - linting y formato de código.
-
-## 📁 Estructura de carpetas
+## Estructura
 
 ```
-AI4Devs-LTI/
-├── 📁 backend/                      # Aplicación backend
-│   ├── 📁 src/
-│   │   ├── 📁 presentation/         # Controladores y rutas
-│   │   │   ├── 📁 controllers/      # Controladores REST API
-│   │   │   └── 📁 __tests__/        # Pruebas de controladores
-│   │   ├── 📁 application/          # Servicios de aplicación
-│   │   │   ├── 📁 services/         # Lógica de negocio
-│   │   │   └── validator.ts         # Validación de entrada
-│   │   ├── 📁 domain/               # Capa de dominio
-│   │   │   ├── 📁 models/           # Entidades de dominio
-│   │   │   └── 📁 repositories/     # Interfaces de repositorio
-│   │   ├── 📁 infrastructure/       # Capa de infraestructura
-│   │   └── 📁 routes/               # Definición de rutas API
-│   ├── 📁 prisma/                   # Esquema y migraciones
-│   │   ├── schema.prisma            # Definición del esquema
-│   │   ├── 📁 migrations/           # Archivos de migración
-│   │   └── seed.ts                  # Script de seeding
-│   ├── package.json                 # Dependencias backend
-│   ├── tsconfig.json                # Configuración TypeScript
-│   └── jest.config.js               # Configuración de Jest
-│
-├── 📁 frontend/                     # Aplicación frontend React
-│   ├── 📁 src/
-│   │   ├── 📁 components/           # Componentes React
-│   │   ├── 📁 services/             # Capa de servicios API
-│   │   ├── 📁 pages/                # Componentes de página
-│   │   └── App.js                   # Componente principal
-│   ├── 📁 cypress/                  # Pruebas E2E
-│   │   └── 📁 e2e/                  # Specs Cypress
-│   ├── package.json                 # Dependencias frontend
-│   └── tsconfig.json                # Configuración TypeScript
-│
-├── 📁 documentation/                # Documentación del proyecto
-│   ├── DataModel.md                 # Modelo de datos y entidades
-│   └── api-spec.yml                # Especificación OpenAPI
-│
-├── 📁 memory-bank/                  # Contexto y documentación del proyecto
-│   ├── projectbrief.md              # Resumen del proyecto
-│   ├── productContext.md            # Contexto de negocio
-│   └── systemPatterns.md            # Patrones de arquitectura
-│
-├── docker-compose.yml               # Contenedor PostgreSQL
-├── package.json                     # Configuración raíz
-└── README.md                        # Este archivo
+.
+|- app/                 Rutas Next.js (UI + API)
+|  |- api/health        Health check
+|  |- api/auth          Auth.js + /register
+|  |- (auth)/           sign-in, sign-up
+|  |- dashboard/
+|  `- layout.tsx, page.tsx, globals.css
+|- components/
+|  |- ui/               Primitivos shadcn
+|  |- music/            StaffRenderer, AudioPlayer, ExerciseContainer, ExerciseResults
+|  |- layout/           Header
+|  `- providers/        QueryProvider
+|- content/             MDX (cursos y lecciones)
+|- lib/
+|  |- music/            Logica musical pura (Tonal.js)
+|  |- exercises/        Contrato + implementaciones por `kind`
+|  |- validation/       Unions Zod discriminadas
+|  |- auth/             Utilidades de password
+|  |- prisma.ts, utils.ts
+|- prisma/              schema.prisma + seed.ts
+|- types/               Extensiones de tipos (next-auth)
+|- auth.ts, auth.config.ts, middleware.ts
+|- openspec/            Artefactos OpenSpec (source of truth del trabajo)
+|- ai-specs/specs/      Estandares y referencias para los agentes
+`- docker-compose.yml   Postgres local (opcional)
 ```
 
-## 🚀 Configuración y pruebas
+## Primeros pasos
 
-Para instrucciones detalladas de setup, entorno y testing, consulta la [Guía de desarrollo](ai-specs/specs/development_guide.md).
+### 1. Requisitos
 
-## 📊 Esquema de base de datos
+- Node.js 20+.
+- PostgreSQL (opciones):
+  - **Local**: `docker compose up -d` usa `docker-compose.yml`.
+  - **Cloud**: una base de datos en [Neon](https://neon.tech).
 
-Entidades principales del sistema:
+### 2. Variables de entorno
 
-- **Candidates**: información personal, educación y experiencia.
-- **Companies**: organizaciones que publican vacantes.
-- **Positions**: vacantes con requisitos y descripciones.
-- **Applications**: postulaciones de candidatos a vacantes.
-- **Interview Flows**: etapas configurables del proceso de entrevista.
-- **Interviews**: sesiones individuales de entrevista y resultados.
+Copia `.env.example` a `.env.local` y rellena:
 
-Para relaciones y detalle completo del modelo, consulta [`ai-specs/specs/data-model.md`](ai-specs/specs/data-model.md).
+```bash
+cp .env.example .env.local
+# Genera AUTH_SECRET:
+openssl rand -base64 32
+```
 
-## 🔗 Documentación API
+### 3. Instalar, migrar, sembrar
 
-La API REST sigue OpenAPI 3.0. Endpoints clave:
+```bash
+npm install
+npm run prisma:migrate   # crea la BD y aplica la primera migracion
+npm run prisma:seed      # inserta curso, tema, leccion, ejercicios y logros
+```
 
-- `GET /candidates` - Listar candidatos con filtros y paginación.
-- `POST /candidates` - Crear candidato.
-- `GET /candidates/{id}` - Obtener detalle de candidato.
-- `GET /positions` - Listar vacantes.
-- `POST /positions` - Crear vacante.
-- `PUT /candidates/{id}` - Actualizar etapa de entrevista de candidato.
+### 4. Desarrollo
 
-Documentación completa en [`ai-specs/specs/api-spec.yml`](ai-specs/specs/api-spec.yml).
+```bash
+npm run dev              # http://localhost:3000
+```
 
-## 🤝 Contribución
+Rutas utiles:
 
-1. Sigue los patrones de arquitectura y desarrollo establecidos.
-2. Escribe pruebas para nuevas funcionalidades.
-3. Actualiza la documentación de especificaciones cuando haya cambios (API, modelo de datos, etc.).
-4. Usa TypeScript para seguridad de tipos.
-5. Respeta principios DDD.
+- `/` - landing
+- `/sign-up` y `/sign-in`
+- `/dashboard` (protegida)
+- `/api/health`
 
+## Scripts
+
+| Script | Proposito |
+|---|---|
+| `dev` | Next.js en modo desarrollo |
+| `build` / `start` | Build y servidor de produccion |
+| `lint` / `typecheck` / `format` | Calidad |
+| `test` / `test:e2e` | Vitest y Playwright |
+| `prisma:migrate` / `prisma:studio` / `prisma:seed` | Prisma workflow |
+
+## Dominio y datos
+
+Las entidades principales estan definidas en `prisma/schema.prisma`:
+
+- **User** (Auth.js) + Account / Session / VerificationToken.
+- **Course -> Topic -> Lesson** (metadata). El contenido teorico vive en
+  `/content` como MDX, vinculado por `slug`.
+- **Exercise** + **ExerciseAttempt** (config/input/answer como JSON, validados
+  con Zod).
+- **UserProgress** unico por (user, lesson).
+- **Achievement** + **UserAchievement**.
+
+Ver detalle en [`ai-specs/specs/data-model.md`](ai-specs/specs/data-model.md).
+
+## Motor de ejercicios
+
+Contrato en [`lib/exercises/types.ts`](lib/exercises/types.ts):
+
+```ts
+interface ExerciseDefinition<TConfig, TInput, TAnswer> {
+  type: 'MULTIPLE_CHOICE' | 'NOTE_WRITING' | 'DICTATION' | 'LISTEN_REPEAT';
+  kind: string;                          // identificador fino
+  configSchema / inputSchema / answerSchema: ZodType<...>;
+  generate(config, seed?): TInput;
+  validate(input, answer): ValidationResult;
+}
+```
+
+El MVP implementa `NoteRecognitionExercise` (opcion multiple con
+pentagrama) en [`lib/exercises/multipleChoice.ts`](lib/exercises/multipleChoice.ts).
+Dictado, escritura y escucha-repite son placeholders para fases
+posteriores.
+
+## OpenSpec
+
+El trabajo se captura primero en `openspec/changes/{nombre}`. El change
+activo es
+[`migrate-to-nextjs-music-mvp`](openspec/changes/migrate-to-nextjs-music-mvp/proposal.md).
+
+## Licencia
+
+MIT, ver [LICENSE.md](LICENSE.md).

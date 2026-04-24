@@ -1,25 +1,37 @@
 ---
-description: Generic backend conventions for new projects created from this template.
+description: Convenciones para codigo de servidor (Next.js API + server actions + Prisma + Auth.js) en Proyecto Musical.
 alwaysApply: true
 ---
 
-# Backend Standards
+# Estandares de servidor
 
-## Scope
+## Alcance
 
-Use these rules when replacing the backend example with real product logic.
+Aplica a: rutas en `app/api/**`, server actions (`'use server'`), librerias
+en `lib/**` que corren en servidor (Prisma, auth, motor de ejercicios), y
+`auth.ts` / `auth.config.ts` / `middleware.ts`.
 
-## Conventions
+## Convenciones
 
-- Keep routes thin and move reusable logic into small modules.
-- Validate input before business logic.
-- Prefer TypeScript for all backend code.
-- Keep one clear responsibility per file where possible.
-- Add tests for every new behavior that matters to the product.
+- **Runtime**: rutas que usan Prisma o bcrypt deben declarar
+  `export const runtime = 'nodejs'`. `middleware.ts` y `auth.config.ts`
+  permanecen edge-safe (nada de Prisma/bcrypt ahi).
+- **Validacion**: todo input externo (body JSON, FormData, parametros de
+  ruta) se valida con Zod antes de tocar logica de negocio.
+- **Prisma**: usa el singleton de `lib/prisma.ts`. Nunca instancies
+  `PrismaClient` en rutas.
+- **Errores**: responde `NextResponse.json({ error, details? }, { status })`
+  con codigos coherentes (400, 401, 403, 404, 409, 500).
+- **Auth**: para rutas protegidas, llama `auth()` al inicio y corta temprano
+  si no hay sesion.
+- **Ejercicios**: nunca ejecutes `generate` ni `validate` sin pasar antes
+  los payloads por las unions discriminadas de `lib/validation/schemas.ts`.
+- **Transacciones**: operaciones que tocan `ExerciseAttempt + UserProgress
+  + UserAchievement` deben envolverse con `prisma.$transaction`.
 
-## Minimum expectations
+## Expectativas minimas
 
-- Preserve a health endpoint.
-- Keep environment-driven configuration.
-- Update Prisma schema and seed intentionally.
-- Document every new endpoint in `ai-specs/specs/api-spec.yml`.
+- Preservar `/api/health` como smoke test.
+- Anadir o actualizar `ai-specs/specs/api-spec.yml` al cambiar endpoints.
+- Cubrir logica nueva con tests unitarios en Vitest.
+- Mantener puro `lib/music/*`: sin DOM, sin Prisma.

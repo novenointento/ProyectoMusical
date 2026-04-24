@@ -1,33 +1,58 @@
 ---
-description: Este documento contiene reglas y guías de desarrollo aplicables a todos los agentes de IA del proyecto (Claude, Cursor, Codex, Gemini, etc.).
+description: Reglas transversales aplicables a todos los agentes de IA (Claude, Cursor, Codex, Gemini) que trabajen en Proyecto Musical.
 alwaysApply: true
 ---
 
-## 1. Principios base
+## 1. Contexto
 
-- **Tareas pequeñas, una por vez**: Trabaja siempre en pasos pequeños. No avances más de un paso sin validar.
-- **Desarrollo guiado por pruebas (TDD)**: Para nueva funcionalidad, comienza con pruebas que fallen según el detalle de la tarea.
-- **Seguridad de tipos**: Todo el código debe estar tipado de forma completa.
-- **Nombres claros**: Usa nombres descriptivos para variables y funciones.
-- **Cambios incrementales**: Prioriza cambios pequeños y enfocados frente a modificaciones grandes y complejas.
-- **Cuestiona supuestos**: Revisa y valida inferencias antes de implementarlas.
-- **Detección de patrones**: Identifica y señala patrones de código repetido.
+Proyecto Musical es una aplicacion Next.js 15 para estudio de lenguaje
+musical orientada a **conservatorio elemental**. Ver
+[`README.md`](../../README.md) para arquitectura, stack y setup.
 
-## 2. Estándares de idioma
+## 2. Principios base
 
+- **Tareas pequenas, una por vez**: trabaja en pasos pequenos y valida.
+  Cada tarea OpenSpec deberia completarse en menos de 2 horas.
+- **Dominio primero**: toda funcionalidad nueva parte de las entidades de
+  [`data-model.md`](data-model.md) y respeta la separacion en capas
+  (`lib/music` pura, `lib/exercises` contrato, componentes para DOM).
+- **Types-first**: define Zod + tipos TypeScript antes de logica. `any`
+  prohibido salvo en registries deliberadamente tipados.
+- **OpenSpec-first**: abre un change en `openspec/changes/{slug}` antes de
+  implementar. Ver [`migrate-to-nextjs-music-mvp`](../../openspec/changes/migrate-to-nextjs-music-mvp/proposal.md).
+- **Auditoria**: todo intento de usuario se persiste integro en
+  `ExerciseAttempt` (input + answer).
+- **Una sola fuente de verdad**: contenido teorico vive en MDX
+  (`/content`), nunca duplicado en BD.
+- **TDD donde aporte**: logica musical y validadores se desarrollan con
+  tests unitarios fallando primero.
+- **Cuestiona supuestos**: valida antes de inferir; revisa archivos antes
+  de modificarlos.
 
-  - Código (variables, funciones, clases ) en ingles
-  - Documentación de código (comentarios, errores, logs) en español
-  - Documentación técnica (README, guías, docs API) en español
-  - Esquemas de datos y nombres de BD en ingles
-  - Archivos de configuración y scripts en ingles
-  - Mensajes de commit en español
-  - Nombres y descripciones de pruebas en español
+## 3. Estandares de idioma
 
-## 3. Estándares específicos
+- Codigo (variables, funciones, clases) en **ingles**.
+- Comentarios, errores, logs y documentacion tecnica en **espanol**.
+- Esquemas de BD y nombres de columnas en **ingles**.
+- Archivos de configuracion y scripts en **ingles**.
+- Mensajes de commit y descripciones de tests en **espanol**.
+- Textos visibles al usuario final en **espanol**.
 
-Para reglas detalladas por área:
+## 4. Workflow
 
-- [Backend Standards](./backend-standards.mdc) - Desarrollo API, patrones de BD, testing, seguridad y buenas prácticas backend.
-- [Frontend Standards](./frontend-standards.mdc) - Componentes React, guías UI/UX y arquitectura frontend.
-- [Documentation Standards](./documentation-standards.mdc) - Estructura, formato y mantenimiento de documentación técnica, incluidas reglas de IA.
+1. Abre change OpenSpec (proposal + design + tasks + specs).
+2. Implementa por tareas pequenas; un proposito por commit.
+3. Antes de marcar una tarea como hecha: `npm run typecheck` y `npm test`
+   en verde.
+4. Actualiza especificaciones afectadas (`data-model.md`, `api-spec.yml`,
+   standards) antes de archivar el change.
+5. `/opsx:verify` antes de `/opsx:archive`.
+
+## 5. Estandares especificos
+
+- [Backend Standards](./backend-standards.mdc) - API, Prisma, Auth, server
+  actions, motor de ejercicios en servidor.
+- [Frontend Standards](./frontend-standards.mdc) - App Router, RSC,
+  Tailwind/shadcn, Zustand, TanStack Query, Tone/VexFlow en cliente.
+- [Documentation Standards](./documentation-standards.mdc) - Estructura,
+  formato y mantenimiento de documentacion tecnica.

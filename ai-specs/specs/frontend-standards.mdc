@@ -1,24 +1,37 @@
 ---
-description: Generic frontend conventions for new projects created from this template.
+description: Convenciones de UI (Next.js App Router, Tailwind, shadcn, Zustand, TanStack Query) en Proyecto Musical.
 alwaysApply: true
 ---
 
-# Frontend Standards
+# Estandares de frontend
 
-## Scope
+## Alcance
 
-Use these rules when replacing the frontend example with real product screens.
+Aplica a `app/**` (componentes y paginas), `components/**` y cualquier
+codigo que se ejecute en cliente.
 
-## Conventions
+## Convenciones
 
-- Keep components focused and easy to replace.
-- Move API calls into `src/services/`.
-- Show explicit loading, success, and error states.
-- Prefer accessible markup and mobile-safe layouts.
-- Preserve at least one runnable smoke path in the UI.
+- **Server components por defecto**. Marca `'use client'` solo cuando
+  necesitas estado, efectos, eventos o APIs del navegador.
+- **UI**: usa primitivos de `components/ui/*` (shadcn, new-york). Nuevos
+  componentes se anaden con `npx shadcn@latest add <componente>`.
+- **Estilos**: Tailwind + `cn()` de `lib/utils.ts`. Evita CSS inline o
+  archivos `.css` propios salvo `app/globals.css`.
+- **Estado**:
+  - Local o de formulario -> `useState` / `useActionState`.
+  - Global cliente -> Zustand (en `components/providers` o `stores/`).
+  - Servidor (datos remotos) -> TanStack Query + server actions.
+- **Audio**: Tone.js solo en componentes `'use client'`. `Tone.start()`
+  debe llamarse dentro de un handler de evento de usuario.
+- **Pentagrama**: VexFlow siempre via `next/dynamic({ ssr: false })`.
+- **Accesibilidad**: `role`, `aria-label`, `aria-live` donde proceda.
+  Los ejercicios exponen su estado con `role="status"`.
+- **Idioma**: todos los textos visibles al usuario en espanol (MVP).
 
-## Minimum expectations
+## Expectativas minimas
 
-- The app should boot cleanly.
-- The first screen should explain the current product state.
-- Critical flows should be covered by at least one test.
+- Cada pantalla debe tener estado de carga y error visibles.
+- Toda entrada del usuario pasa por Zod antes de server action.
+- Preservar una ruta ejecutable (al menos `/api/health` + landing).
+- Cubrir los flujos criticos con un test Playwright.

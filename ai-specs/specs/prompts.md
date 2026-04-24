@@ -1,20 +1,31 @@
-# Prompt Starters
+# Prompts de referencia
 
-Use these examples as seed prompts for a new project.
+Ejemplos de prompts que encajan con el workflow OpenSpec + el dominio de
+Proyecto Musical.
 
-## Feature kickoff
+## Abrir un change nuevo
 
-Describe the first real feature and ask the AI to create:
+> Abre un change OpenSpec `add-dictation-exercise` para implementar el
+> ejercicio de dictado (2-4 notas). Genera proposal, design, tasks y un
+> spec en `specs/exercises/spec.md` (delta). Recuerda respetar el contrato
+> `ExerciseDefinition` y extender la union discriminada Zod.
 
-- proposal
-- design
-- spec
-- tasks
+## Backend / servidor
 
-## Backend prompt
+> Implementa la server action `recordAttempt(exerciseId, answer, seed)`.
+> Debe: autenticar con `auth()`, validar inputs con Zod, regenerar el
+> input con `generate(config, seed)`, validar respuesta, persistir
+> `ExerciseAttempt` y actualizar `UserProgress` dentro de una transaccion
+> Prisma. Acompana con tests Vitest.
 
-Implement the smallest backend slice for the active OpenSpec change and keep tests and docs updated.
+## Frontend / UI
 
-## Frontend prompt
+> Conecta `ExerciseContainer` con server actions reales via TanStack
+> Query mutations y muestra estados de carga/error en espanol. Respeta
+> accesibilidad (`role="radiogroup"`, `role="status"`).
 
-Replace the starter UI with the first real user flow and connect it to the backend.
+## Motor musical
+
+> Anade `lib/music/intervals.ts: classifyInterval(from, to)` que devuelva
+> la clasificacion (`m2`, `M3`, ...) con Tonal.js. Incluye tests unitarios
+> Vitest con casos borde (mismo pitch, octava, tritono).
