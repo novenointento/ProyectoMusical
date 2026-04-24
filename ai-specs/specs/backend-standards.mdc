@@ -1,0 +1,25 @@
+---
+description: Generic backend conventions for new projects created from this template.
+alwaysApply: true
+---
+
+# Backend Standards
+
+## Scope
+
+Use these rules when replacing the backend example with real product logic.
+
+## Conventions
+
+- Keep routes thin and move reusable logic into small modules.
+- Validate input before business logic.
+- Prefer TypeScript for all backend code.
+- Keep one clear responsibility per file where possible.
+- Add tests for every new behavior that matters to the product.
+
+## Minimum expectations
+
+- Preserve a health endpoint.
+- Keep environment-driven configuration.
+- Update Prisma schema and seed intentionally.
+- Document every new endpoint in `ai-specs/specs/api-spec.yml`.

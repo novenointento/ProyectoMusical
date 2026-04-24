@@ -1,0 +1,33 @@
+---
+description: Este documento contiene reglas y guías de desarrollo aplicables a todos los agentes de IA del proyecto (Claude, Cursor, Codex, Gemini, etc.).
+alwaysApply: true
+---
+
+## 1. Principios base
+
+- **Tareas pequeñas, una por vez**: Trabaja siempre en pasos pequeños. No avances más de un paso sin validar.
+- **Desarrollo guiado por pruebas (TDD)**: Para nueva funcionalidad, comienza con pruebas que fallen según el detalle de la tarea.
+- **Seguridad de tipos**: Todo el código debe estar tipado de forma completa.
+- **Nombres claros**: Usa nombres descriptivos para variables y funciones.
+- **Cambios incrementales**: Prioriza cambios pequeños y enfocados frente a modificaciones grandes y complejas.
+- **Cuestiona supuestos**: Revisa y valida inferencias antes de implementarlas.
+- **Detección de patrones**: Identifica y señala patrones de código repetido.
+
+## 2. Estándares de idioma
+
+
+  - Código (variables, funciones, clases ) en ingles
+  - Documentación de código (comentarios, errores, logs) en español
+  - Documentación técnica (README, guías, docs API) en español
+  - Esquemas de datos y nombres de BD en ingles
+  - Archivos de configuración y scripts en ingles
+  - Mensajes de commit en español
+  - Nombres y descripciones de pruebas en español
+
+## 3. Estándares específicos
+
+Para reglas detalladas por área:
+
+- [Backend Standards](./backend-standards.mdc) - Desarrollo API, patrones de BD, testing, seguridad y buenas prácticas backend.
+- [Frontend Standards](./frontend-standards.mdc) - Componentes React, guías UI/UX y arquitectura frontend.
+- [Documentation Standards](./documentation-standards.mdc) - Estructura, formato y mantenimiento de documentación técnica, incluidas reglas de IA.

@@ -1,0 +1,12 @@
+---
+description: Documentation rules for this starter repository.
+alwaysApply: true
+---
+
+# Documentation Standards
+
+- Keep product-facing technical documentation in English.
+- Update README when the template starts representing a real product.
+- Remove placeholder text once a real decision exists.
+- Keep OpenSpec artifacts and implementation in sync.
+- Document assumptions, constraints, and next steps explicitly.

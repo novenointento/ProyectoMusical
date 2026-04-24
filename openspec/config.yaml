@@ -1,0 +1,16 @@
+schema: spec-driven
+
+context: |
+  Tech stack: React frontend, Node.js/Express backend, Prisma, PostgreSQL.
+  Goal: use this repository as a reusable starter template for new products.
+  Keep business logic generic until a real project domain is defined.
+  All new changes should be captured first in OpenSpec artifacts before implementation.
+
+rules:
+  _global:
+    - Read README.md and ai-specs/specs/base-standards.mdc before creating artifacts.
+    - Keep each change small, concrete, and testable.
+    - Replace examples with project-specific content as soon as the real domain is known.
+  tasks:
+    - Break work into tasks of less than 2 hours.
+    - Every change should end with verification and documentation updates.

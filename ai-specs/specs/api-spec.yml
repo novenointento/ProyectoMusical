@@ -1,0 +1,18 @@
+openapi: 3.0.3
+info:
+  title: Project Template API
+  version: 0.1.0
+  description: Minimal API contract for the starter template.
+paths:
+  /health:
+    get:
+      summary: Health check
+      responses:
+        '200':
+          description: Service is available
+  /api/example-task:
+    get:
+      summary: Example task payload
+      responses:
+        '200':
+          description: Generic task example returned

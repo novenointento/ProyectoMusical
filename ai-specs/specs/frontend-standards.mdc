@@ -1,0 +1,24 @@
+---
+description: Generic frontend conventions for new projects created from this template.
+alwaysApply: true
+---
+
+# Frontend Standards
+
+## Scope
+
+Use these rules when replacing the frontend example with real product screens.
+
+## Conventions
+
+- Keep components focused and easy to replace.
+- Move API calls into `src/services/`.
+- Show explicit loading, success, and error states.
+- Prefer accessible markup and mobile-safe layouts.
+- Preserve at least one runnable smoke path in the UI.
+
+## Minimum expectations
+
+- The app should boot cleanly.
+- The first screen should explain the current product state.
+- Critical flows should be covered by at least one test.

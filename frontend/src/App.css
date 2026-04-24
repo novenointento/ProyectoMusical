@@ -1,0 +1,122 @@
+.app-shell {
+  min-height: 100vh;
+  padding: 48px 20px 64px;
+  background:
+    radial-gradient(circle at top left, rgba(255, 179, 71, 0.28), transparent 32%),
+    radial-gradient(circle at bottom right, rgba(48, 120, 255, 0.22), transparent 28%),
+    linear-gradient(135deg, #f6f1e8 0%, #f8fafc 50%, #eef4ff 100%);
+  color: #1f2937;
+}
+
+.hero,
+.status-panel,
+.cards-grid {
+  width: min(1080px, 100%);
+  margin: 0 auto;
+}
+
+.hero {
+  margin-bottom: 28px;
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.8rem;
+  color: #b45309;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(2.4rem, 6vw, 4.8rem);
+  line-height: 0.95;
+  max-width: 820px;
+}
+
+.hero-copy {
+  max-width: 720px;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #374151;
+}
+
+.status-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+  padding: 20px 24px;
+  border: 1px solid rgba(31, 41, 55, 0.08);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(12px);
+}
+
+.panel-label {
+  margin: 0 0 6px;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.badge {
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  text-transform: lowercase;
+}
+
+.badge-ok {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.badge-loading {
+  background: #e0f2fe;
+  color: #075985;
+}
+
+.badge-offline {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+}
+
+.template-card {
+  padding: 24px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(31, 41, 55, 0.08);
+  box-shadow: 0 18px 60px rgba(15, 23, 42, 0.08);
+}
+
+.template-card h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+.template-card p {
+  margin-top: 0;
+  color: #4b5563;
+}
+
+.template-card ul {
+  margin: 0;
+  padding-left: 18px;
+  color: #1f2937;
+  line-height: 1.6;
+}
+
+@media (max-width: 720px) {
+  .status-panel {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
