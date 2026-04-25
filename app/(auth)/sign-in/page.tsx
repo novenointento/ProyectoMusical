@@ -1,21 +1,25 @@
 import Link from 'next/link';
-import { signIn } from '@/auth';
 import { Button } from '@/components/ui/button';
+import { signInAction } from './actions';
 
-export default function SignInPage() {
-  async function handleSignIn(formData: FormData) {
-    'use server';
-    await signIn('credentials', {
-      email: formData.get('email'),
-      password: formData.get('password'),
-      redirectTo: '/dashboard',
-    });
-  }
+export default async function SignInPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ error?: string }>;
+}) {
+  const { error } = await searchParams;
 
   return (
     <main className="mx-auto flex min-h-screen max-w-sm flex-col justify-center gap-6 p-6">
       <h1 className="text-2xl font-bold">Iniciar sesion</h1>
-      <form action={handleSignIn} className="flex flex-col gap-3">
+
+      {error === 'invalid' && (
+        <p className="rounded border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive">
+          Email o contraseña incorrectos.
+        </p>
+      )}
+
+      <form action={signInAction} className="flex flex-col gap-3">
         <input
           name="email"
           type="email"
@@ -33,6 +37,7 @@ export default function SignInPage() {
         />
         <Button type="submit">Entrar</Button>
       </form>
+
       <p className="text-sm text-muted-foreground">
         No tienes cuenta?{' '}
         <Link className="underline" href="/sign-up">

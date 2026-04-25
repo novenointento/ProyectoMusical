@@ -137,6 +137,16 @@ El trabajo se captura primero en `openspec/changes/{nombre}`. El change
 activo es
 [`migrate-to-nextjs-music-mvp`](openspec/changes/migrate-to-nextjs-music-mvp/proposal.md).
 
+## Proximos pasos
+
+Crear proyecto Neon y copiar DATABASE_URL a .env.local.
+openssl rand -base64 32 → pegar en AUTH_SECRET.
+npm install → resolver cualquier peer de React 19.
+npm run prisma:migrate -- --name init y npm run prisma:seed.
+npm run dev → verificar landing + /api/health.
+
+Las Fases 1-6 quedan documentadas en openspec/changes/migrate-to-nextjs-music-mvp/tasks.md para avanzar una a una.
+
 ## Licencia
 
 MIT, ver [LICENSE.md](LICENSE.md).

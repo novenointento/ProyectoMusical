@@ -1,35 +1,59 @@
+/* Material Symbols Outlined — must be first before @tailwind */
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+  font-family: 'Material Symbols Outlined';
+  font-style: normal;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  user-select: none;
+}
+
+.stave-line {
+  height: 1px;
+  background-color: #ead1dc;
+  width: 100%;
+}
+
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Academic Conservatory palette */
+    --background: 340 100% 98%;
+    --foreground: 330 5% 11%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 337 46% 96%;
+    --card-foreground: 330 5% 11%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 336 19% 39%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 336 29% 91%;
+    --secondary-foreground: 330 5% 11%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 336 29% 95%;
+    --muted-foreground: 336 8% 40%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 337 84% 88%;
+    --accent-foreground: 330 5% 11%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 336 29% 87%;
+    --input: 336 29% 87%;
+    --ring: 336 19% 39%;
 
-    --radius: 0.5rem;
+    --radius: 0.25rem;
   }
 
   .dark {
@@ -66,6 +90,7 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-lexend), sans-serif;
     font-feature-settings: 'rlig' 1, 'calt' 1;
   }
 }
